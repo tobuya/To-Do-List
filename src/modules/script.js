@@ -57,3 +57,16 @@ inputField.addEventListener('keypress', (e) => {
     addToList();
   }
 });
+
+
+window.Remove = (index) => {
+  const storedData = localStorage.getItem('To-Do');
+  tasks = JSON.parse(storedData);
+  tasks.splice(index, 1);
+  for (let i = 0; i < tasks.length; i += 1) {
+    tasks[i].index = i;
+  }
+
+  localStorage.setItem('To-Do', JSON.stringify(tasks));
+  addToList();
+};
