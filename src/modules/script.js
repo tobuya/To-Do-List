@@ -34,3 +34,26 @@ function addToList() {
 }
 
 window.addEventListener('load', addToList);
+
+inputField.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter' && inputField.value.length !== 0) {
+    const storedData = localStorage.getItem('To-Do');
+
+    if (storedData === null) {
+      tasks = [];
+    } else {
+      tasks = JSON.parse(storedData);
+      index = tasks.length === 0 ? 0 : tasks.length;
+    }
+
+    const LocalData = {
+      index,
+      description: inputField.value,
+      completed,
+    };
+
+    tasks.push(LocalData);
+    localStorage.setItem('To-Do', JSON.stringify(tasks));
+    addToList();
+  }
+});
