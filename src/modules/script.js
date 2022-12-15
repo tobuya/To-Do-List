@@ -70,3 +70,10 @@ window.Remove = (index) => {
   localStorage.setItem('To-Do', JSON.stringify(tasks));
   addToList();
 };
+
+window.onload = () => {
+  if (localStorage.getItem('To-Do')) {
+    tasks = JSON.parse(localStorage.getItem('To-Do'));
+  }
+  addToList();
+};
