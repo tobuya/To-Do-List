@@ -77,3 +77,17 @@ window.onload = () => {
   }
   addToList();
 };
+
+window.editList = (index) => {
+  const editBtn = document.getElementById(`edit${index}`);
+  const saveBtn = document.getElementById(`save${index}`);
+
+  saveBtn.style.display = 'block';
+  editBtn.style.display = 'none';
+  const specList = document.getElementById(`list${index}`);
+  specList.removeAttribute('readonly');
+  const { length } = specList.value;
+  specList.setSelectionRange(length, length);
+  specList.focus();
+  return specList;
+};
