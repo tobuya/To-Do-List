@@ -1,33 +1,9 @@
 const listData = document.querySelector('.lists');
 const inputField = document.querySelector('.add-to-list');
 
-const tasks = [
-  {
-    description: 'Workout',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'Eat fruits',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Write Code',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Read a novel',
-    completed: false,
-    index: 3,
-  },
-  {
-    description: 'Play Football',
-    completed: false,
-    index: 4,
-  },
-];
+let tasks = [];
+const completed = false;
+let index = 0;
 
 function addToList() {
   listData.innerHTML = '';
@@ -58,3 +34,75 @@ function addToList() {
 }
 
 window.addEventListener('load', addToList);
+
+inputField.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter' && inputField.value.length !== 0) {
+    const storedData = localStorage.getItem('To-Do');
+
+    if (storedData === null) {
+      tasks = [];
+    } else {
+      tasks = JSON.parse(storedData);
+      index = tasks.length === 0 ? 0 : tasks.length;
+    }
+
+    const LocalData = {
+      index,
+      description: inputField.value,
+      completed,
+    };
+
+    tasks.push(LocalData);
+    localStorage.setItem('To-Do', JSON.stringify(tasks));
+    addToList();
+  }
+});
+
+window.Remove = (index) => {
+  const storedData = localStorage.getItem('To-Do');
+  tasks = JSON.parse(storedData);
+  tasks.splice(index, 1);
+  for (let i = 0; i < tasks.length; i += 1) {
+    tasks[i].index = i;
+  }
+
+  localStorage.setItem('To-Do', JSON.stringify(tasks));
+  addToList();
+};
+
+window.onload = () => {
+  if (localStorage.getItem('To-Do')) {
+    tasks = JSON.parse(localStorage.getItem('To-Do'));
+  }
+  addToList();
+};
+
+window.editList = (index) => {
+  const editBtn = document.getElementById(`edit${index}`);
+  const saveBtn = document.getElementById(`save${index}`);
+
+  saveBtn.style.display = 'block';
+  editBtn.style.display = 'none';
+  const specList = document.getElementById(`list${index}`);
+  specList.removeAttribute('readonly');
+  const { length } = specList.value;
+  specList.setSelectionRange(length, length);
+  specList.focus();
+  return specList;
+};
+
+window.saveList = (index) => {
+  const editBtn = document.getElementById(`edit${index}`);
+  const saveBtn = document.getElementById(`save${index}`);
+
+  saveBtn.style.display = 'none';
+  editBtn.style.display = 'block';
+
+  const specList = document.getElementById(`list${index}`);
+  const storedData = localStorage.getItem('To-Do');
+  tasks = JSON.parse(storedData);
+  tasks[index].description = specList.value;
+
+  localStorage.setItem('To-Do', JSON.stringify(tasks));
+  addToList();
+};
