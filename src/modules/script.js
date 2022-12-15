@@ -58,7 +58,6 @@ inputField.addEventListener('keypress', (e) => {
   }
 });
 
-
 window.Remove = (index) => {
   const storedData = localStorage.getItem('To-Do');
   tasks = JSON.parse(storedData);
@@ -90,4 +89,20 @@ window.editList = (index) => {
   specList.setSelectionRange(length, length);
   specList.focus();
   return specList;
+};
+
+window.saveList = (index) => {
+  const editBtn = document.getElementById(`edit${index}`);
+  const saveBtn = document.getElementById(`save${index}`);
+
+  saveBtn.style.display = 'none';
+  editBtn.style.display = 'block';
+
+  const specList = document.getElementById(`list${index}`);
+  const storedData = localStorage.getItem('To-Do');
+  tasks = JSON.parse(storedData);
+  tasks[index].description = specList.value;
+
+  localStorage.setItem('To-Do', JSON.stringify(tasks));
+  addToList();
 };
