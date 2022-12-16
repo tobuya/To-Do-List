@@ -1,5 +1,6 @@
 const listData = document.querySelector('.lists');
 const inputField = document.querySelector('.add-to-list');
+const clearCompleted = document.querySelector('.clear-all');
 
 let tasks = [];
 const completed = false;
@@ -129,3 +130,10 @@ window.Check = (index) => {
     addToList();
   }
 };
+
+clearCompleted.addEventListener('click', () => {
+  const storedData = localStorage.getItem('To-Do');
+  tasks = JSON.parse(storedData);
+  const clearedData = tasks.filter((element) => element.completed === false);
+  tasks = clearedData;
+});
