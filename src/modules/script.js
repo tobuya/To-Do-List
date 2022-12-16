@@ -140,4 +140,5 @@ clearCompleted.addEventListener('click', () => {
     tasks[i].index = i;
   }
   localStorage.setItem('To-Do', JSON.stringify(tasks));
+  addToList();
 });
