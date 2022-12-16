@@ -13,22 +13,19 @@
 
 # 📗 Table of Contents
 
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Key Features](#key-features)
-- [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
-- [👥 Authors](#authors)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [📝 License](#license)
+- [📗 Table of Contents](#-table-of-contents)
+- [📖 To Do List ](#-to-do-list-)
+  - [🛠 Built With ](#-built-with-)
+    - [Key Features ](#key-features-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+  - [👥 Authors ](#-authors-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
 <!-- PROJECT DESCRIPTION -->
 
@@ -47,9 +44,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Lists the things that needs to be done**
-- **Allows removal of completed tasks**
-- **Allows addition of completed tasks**
+- **Interactivity**
+- **Add and Remove Actions**
+- **Remove all completed tasks action**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,9 +111,9 @@ Clone this repository to your desired folder:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- **Remove the task when marked as completed**
-- **Add and remove actions**
-- **Remove all action**
+- **Animations**
+- **Transitions**
+- **Popup**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
