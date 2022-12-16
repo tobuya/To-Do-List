@@ -1,5 +1,6 @@
 const listData = document.querySelector('.lists');
 const inputField = document.querySelector('.add-to-list');
+const clearCompleted = document.querySelector('.clear-all');
 
 let tasks = [];
 const completed = false;
@@ -12,9 +13,9 @@ function addToList() {
       listData.innerHTML += `
       <div class="main-list">
       <input type="checkbox" class="check" id="check${element.index}" onclick="Check(${element.index});" checked>
-      <input class="list-item" id="list${element.index}" value="${element.description}" readonly>
+      <input class="list-item" id="list${element.index}" value="${element.description}">
       <i class="fa-solid fa-pen-to-square edit " id="edit${element.index}" onclick="editList(${element.index});"></i>
-           <i class="fa-solid fa-floppy-disk save hide" id="save${element.index}" onclick="saveList(${element.index});"></i>
+      <i class="fa-solid fa-floppy-disk save hide" id="save${element.index}" onclick="saveList(${element.index});"></i>
       <i id="remove-icon" onclick="Remove(${element.index});" class="fa-solid fa-trash"></i>
       </div>
      `;
@@ -22,9 +23,9 @@ function addToList() {
       listData.innerHTML += `
       <div class="main-list">
       <input type="checkbox" class="check" id="check${element.index}" onclick="Check(${element.index});">
-      <input class="list-item" id="list${element.index}" value="${element.description}" readonly>
+      <input class="list-item" id="list${element.index}" value="${element.description}">
       <i class="fa-solid fa-pen-to-square edit " id="edit${element.index}" onclick="editList(${element.index});"></i>
-           <i class="fa-solid fa-floppy-disk save hide" id="save${element.index}" onclick="saveList(${element.index});"></i>
+      <i class="fa-solid fa-floppy-disk save hide" id="save${element.index}" onclick="saveList(${element.index});"></i>
       <i id="remove-icon" onclick="Remove(${element.index});" class="fa-solid fa-trash"></i>
       </div>
      `;
@@ -106,3 +107,38 @@ window.saveList = (index) => {
   localStorage.setItem('To-Do', JSON.stringify(tasks));
   addToList();
 };
+
+window.Check = (index) => {
+  const checkBox = document.getElementById(`check${index}`);
+  const specList = document.getElementById(`list${index}`);
+  if (checkBox.checked) {
+    specList.style.textDecoration = 'line-through';
+    specList.style.color = 'gray';
+
+    const storedData = localStorage.getItem('To-Do');
+    tasks = JSON.parse(storedData);
+    tasks[index].completed = true;
+    localStorage.setItem('To-Do', JSON.stringify(tasks));
+    addToList();
+  } else {
+    specList.style.textDecoration = 'none';
+    specList.style.color = 'inherit';
+    const storedData = localStorage.getItem('To-Do');
+    tasks = JSON.parse(storedData);
+    tasks[index].completed = false;
+    localStorage.setItem('To-Do', JSON.stringify(tasks));
+    addToList();
+  }
+};
+
+clearCompleted.addEventListener('click', () => {
+  const storedData = localStorage.getItem('To-Do');
+  tasks = JSON.parse(storedData);
+  const clearedData = tasks.filter((element) => element.completed === false);
+  tasks = clearedData;
+  for (let i = 0; i < tasks.length; i += 1) {
+    tasks[i].index = i;
+  }
+  localStorage.setItem('To-Do', JSON.stringify(tasks));
+  addToList();
+});
