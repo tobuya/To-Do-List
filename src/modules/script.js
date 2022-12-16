@@ -136,4 +136,8 @@ clearCompleted.addEventListener('click', () => {
   tasks = JSON.parse(storedData);
   const clearedData = tasks.filter((element) => element.completed === false);
   tasks = clearedData;
+  for (let i = 0; i < tasks.length; i += 1) {
+    tasks[i].index = i;
+  }
+  
 });
