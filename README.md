@@ -17,6 +17,7 @@
 - [📖 To Do List ](#-to-do-list-)
   - [🛠 Built With ](#-built-with-)
     - [Key Features ](#key-features-)
+  - [🚀 Live Demo ](#-live-demo-)
   - [💻 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -47,6 +48,12 @@
 - **Interactivity**
 - **Add and Remove Actions**
 - **Remove all completed tasks action**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Live Demo Link](https://tobuya.github.io/To-Do-List/dist/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
