@@ -35,3 +35,25 @@ describe('Add and delete tasks', () => {
     expect(lists).toHaveLength(listLength - 1);
   });
 });
+
+describe('Test functions responsible for status and content updates', () => {
+  document.body.innerHTML = '<section> <ul id="todo-container"></ul> </section>';
+
+  const todoList = new TodoList();
+
+  test('Clear completed', () => {
+    todoList.clearAllCompleted();
+    expect(todoList.tasks).toHaveLength(0);
+  });
+
+  test('Edit task', () => {
+    todoList.addToList('Forth Test');
+    todoList.editTask(0, 'Fifth Test');
+    expect(todoList.tasks[0]?.description).toBe('Fifth Test');
+  });
+
+  test('Check status', () => {
+    todoList.completedTask(0, true);
+    expect(todoList.tasks.at(0).completed).toBe(true);
+  });
+});
