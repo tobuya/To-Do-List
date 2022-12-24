@@ -1,2 +1,2 @@
 import './style.css';
-import './modules/script.js';
+import './modules/create.js';
