@@ -1,13 +1,9 @@
 import './style.css';
 import TodoList from './modules/create.js';
 
-// const tasksList = document.querySelector('.list');
 const todoList = document.querySelector('#todo-container');
-// const btnClear = document.querySelector('.btn-clear');
 const clearBtn = document.querySelector('#btn');
-// const input = document.querySelector('.input');
 const inputField = document.querySelector('#new-task');
-// const btnAdd = document.querySelector('.btn-add');
 const addItemToList = document.querySelector('#add');
 
 const todo = new TodoList();
