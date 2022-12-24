@@ -1,8 +1,10 @@
+/** @format */
+
 const setLocalStorage = (newTodo) => localStorage.setItem('todoList', JSON.stringify(newTodo));
 const getFromLocalStorage = () => JSON.parse(localStorage.getItem('todoList')) ?? [];
 
 export default class TodoList {
-  // tasks;
+  tasks;
 
   constructor() {
     this.tasks = getFromLocalStorage();
@@ -16,7 +18,7 @@ export default class TodoList {
     };
     this.tasks.push(task);
     setLocalStorage(this.tasks);
-    this.displayTasks();
+    this.displayTodo();
   };
 
   displayToDo = () => {

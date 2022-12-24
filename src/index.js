@@ -1,3 +1,5 @@
+/** @format */
+
 import './style.css';
 import TodoList from './modules/create.js';
 
