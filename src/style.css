@@ -49,9 +49,31 @@ form#form {
 #todo-container {
   display: flex;
   flex-direction: column;
+  padding-inline-start: 0;
+  margin: 0;
 }
 
-#remove-icon,
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+  border-bottom: 1px solid #d3d3d4;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.desc {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: larger;
+}
+
 .material-icons {
   font-size: larger;
   margin-right: 2%;
@@ -59,20 +81,9 @@ form#form {
   cursor: pointer;
 }
 
-/* .save,
-.edit {
-  margin-right: 1%;
-  color: #222d2d;
-} */
-
 input[type=checkbox] {
   cursor: pointer;
 }
-
-/* .title-holder {
-  display: flex;
-  align-items: center;
-} */
 
 #clear {
   cursor: pointer;
@@ -90,30 +101,4 @@ input[type=checkbox] {
   color: #000;
   font-size: medium;
   text-transform: uppercase;
-}
-
-.main-tasks {
-  padding: 2% 0;
-  border-bottom: 1px solid #cfcfcf;
-  font-size: medium;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-/* input.check {
-  width: 1rem;
-  height: 1rem;
-} */
-
-.items {
-  width: 85%;
-  border: none;
-  outline: none;
-  font-size: medium;
-  background: transparent;
-}
-
-.save {
-  display: none;
 }

@@ -1,55 +1,75 @@
-const form = document.querySelector('#form');
-const inputField = document.querySelector('#new-task');
-const todoList = document.querySelector('#todo-container');
+const setLocalStorage = (newTodo) => localStorage.setItem('todoList', JSON.stringify(newTodo));
+const getFromLocalStorage = () => JSON.parse(localStorage.getItem('todoList')) ?? [];
 
-// eslint-disable-next-line import/no-mutable-exports
-export let taskList = [];
+export default class TodoList {
+  tasks;
 
-const addTaskToList = (e) => {
-  e.preventDefault();
-
-  const task = inputField.value;
-
-  if (!task) {
-    return;
+  constructor() {
+    this.tasks = getFromLocalStorage();
   }
 
-  const mainList = document.createElement('div');
-  mainList.classList.add('main-tasks');
+  addTask = (disc) => {
+    const task = {
+      index: this.tasks.length,
+      description: disc,
+      completed: false,
+    };
+    this.tasks.push(task);
+    setLocalStorage(this.tasks);
+    this.displayTasks();
+  };
 
-  mainList.innerHTML = `
-      <input type="checkbox" class="check">
-      <input class="items" value="${task}">
-      <i class="fa-solid fa-pen-to-square edit"></i>
-      <i class="fa-solid fa-floppy-disk save hide"></i>
-      <i id="remove-icon" class="fa-solid fa-trash delete"></i>
-  `;
+  displayTasks = () => {
+    this.tasks = getFromLocalStorage();
+    this.tasks.sort((a, b) => a.index - b.index);
+    const tasksList = document.querySelector('#todo-container');
+    tasksList.innerHTML = '';
+    this.tasks.forEach((task) => {
+      tasksList.innerHTML += `
+      <li class="task">
+      <div class="content">
+      <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : 'unchecked'} id="${task.index}"> 
+      <input type="text" id="${task.index}" value="${task.description}" ${task.completed ? "class='desc completed'" : "class='desc'"}>
+      </div>
+      <button type="button" class="btn btn-remove">
+      <i id="${task.index}" class="fa fa-times remove" aria-hidden="true"></i>
+      </button>
+      </li>
+      `;
+    });
+  };
 
-  todoList.appendChild(mainList);
-  taskList.push({ id: taskList.length, task, completed: false });
-  localStorage.setItem('my-tasks', JSON.stringify(taskList));
-  inputField.value = '';
-};
+  removeTask = (i) => {
+    const filteredTasks = this.tasks.filter((task) => task.index !== +i);
+    filteredTasks.forEach((task, index) => {
+      task.index = index;
+    });
+    setLocalStorage(filteredTasks);
+    this.tasks = getFromLocalStorage();
+    this.displayTasks();
+  };
 
-export const loadDataFromLocalStorage = () => {
-  if (localStorage.getItem('my-tasks')) {
-    taskList = JSON.parse(localStorage.getItem('my-tasks'));
-  }
-  todoList.innerHTML = '';
+  complete = (i, value) => {
+    const task = this.tasks.find((task) => task.index === +i);
+    task.completed = value;
+    setLocalStorage(this.tasks);
+    this.displayTasks();
+  };
 
-  taskList.forEach((item) => {
-    const mainList = document.createElement('div');
-    mainList.classList.add('main-tasks');
-    mainList.innerHTML = `
-      <input type="checkbox" class="check">
-      <input class="items" value="${item.task}">
-      <i class="fa-solid fa-pen-to-square edit"></i>
-      <i class="fa-solid fa-floppy-disk save hide"></i>
-      <i id="remove-icon" class="fa-solid fa-trash delete"></i>
-  `;
-    todoList.appendChild(mainList);
-  });
-};
+  clearAll = () => {
+    const unCompletedTasks = this.tasks.filter(
+      (task) => task.completed === false,
+    );
+    setLocalStorage(unCompletedTasks);
+    this.displayTasks();
+  };
 
-form.addEventListener('submit', addTaskToList);
-window.addEventListener('load', loadDataFromLocalStorage);
+  editTask = (i, value) => {
+    const task = this.tasks.find((task) => task.index === +i);
+    if (task) {
+      task.description = value.trim();
+    }
+    setLocalStorage(this.tasks);
+    this.displayTasks();
+  };
+}
