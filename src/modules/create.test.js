@@ -16,20 +16,19 @@ describe('Add and delete tasks', () => {
   });
 
   test('Adding task to DOM', () => {
-    todoList.addToList('Second Test');
     const lists = document.querySelectorAll('.task');
     expect(lists).toHaveLength(listLength + 1);
   });
 
   test('Removing task', () => {
-    todoList.addToList('Third Test');
+    todoList.addToList('Second Test');
     const listLength = todoList.tasks.length;
     todoList.removeFromToDo(0);
     expect(todoList.tasks).toHaveLength(listLength - 1);
   });
 
   test('Removing task from DOM', () => {
-    todoList.addToList('Forth Test');
+    todoList.addToList('Third Test');
     const listLength = todoList.tasks.length;
     todoList.removeFromToDo(0);
     const lists = document.querySelectorAll('.task');

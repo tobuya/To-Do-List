@@ -18,7 +18,7 @@ export default class TodoList {
     };
     this.tasks.push(task);
     setLocalStorage(this.tasks);
-    this.displayTodo();
+    this.displayToDo();
   };
 
   displayToDo = () => {
