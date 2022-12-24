@@ -15,6 +15,7 @@ body {
   border: 2px solid #c4c5c6;
   width: 60vw;
   margin-top: 8vh;
+  box-shadow: 0 3px 3px 3px #c4c5c6;
 }
 
 #headline {
@@ -67,11 +68,15 @@ form#form {
   gap: 5px;
 }
 
-.desc {
+.disc {
   background: none;
   border: none;
   outline: none;
   font-size: larger;
+}
+
+.completed {
+  text-decoration: line-through;
 }
 
 .material-icons {

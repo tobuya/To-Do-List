@@ -2,31 +2,31 @@ import './style.css';
 import TodoList from './modules/create.js';
 
 const todoList = document.querySelector('#todo-container');
-const clearBtn = document.querySelector('#btn');
+const clearBtn = document.querySelector('#clear');
 const inputField = document.querySelector('#new-task');
 const addItemToList = document.querySelector('#add');
 
-const todo = new TodoList();
+const tasks = new TodoList();
 
 document.addEventListener('DOMContentLoaded', () => {
-  todo.displayTasks();
+  tasks.displayToDo();
 });
 
 addItemToList.addEventListener('click', (e) => {
   e.preventDefault();
-  todo.addTask(inputField.value);
+  tasks.addToList(inputField.value);
   inputField.value = '';
 });
 
 todoList.addEventListener('click', (e) => {
   if (e.target.classList.contains('remove')) {
     const targetId = e.target.getAttribute('id');
-    todo.removeTask(targetId);
+    tasks.removeFromToDo(targetId);
   } else if (e.target.closest('.disc')) {
     const disc = e.target.closest('.disc');
     disc.addEventListener('keyup', () => {
       const index = +disc.id;
-      todo.editTask(index, disc.value);
+      tasks.editTask(index, disc.value);
     });
   } else if (e.target.classList.contains('checkbox')) {
     const checkbox = document.querySelectorAll('.checkbox');
@@ -34,9 +34,9 @@ todoList.addEventListener('click', (e) => {
       item.addEventListener('change', (e) => {
         const targetId = e.target.getAttribute('id');
         if (e.target.checked) {
-          todo.complete(targetId, true);
+          tasks.completedTask(targetId, true);
         } else {
-          todo.complete(targetId, false);
+          tasks.completedTask(targetId, false);
         }
       });
     });
@@ -44,5 +44,5 @@ todoList.addEventListener('click', (e) => {
 });
 
 clearBtn.addEventListener('click', () => {
-  todo.clearAll();
+  tasks.clearAllCompleted();
 });
